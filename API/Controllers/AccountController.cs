@@ -40,8 +40,8 @@ namespace API.Controllers
             user.PassworgHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
             user.PassworgSalt = hmac.Key;
 
-            // if (await UserExists(user.Email)) return BadRequest("This Email is token !!");
-            //////////////
+            if (await UserExists(user.Email)) return BadRequest("This Email is token !!");
+
             _context.Users.Add(user);
 
             await _context.SaveChangesAsync();
